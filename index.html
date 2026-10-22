@@ -2,13 +2,326 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Сюрприз для тебе 💗</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090609">
+<title>Тільки ти ❤️</title>
 <style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#ffdce8,#fff0f5);font-family:Arial,sans-serif;color:#7b294d;padding:18px;box-sizing:border-box}.card{max-width:440px;width:100%;padding:26px 18px;background:#fff9fc;border-radius:25px;text-align:center;box-shadow:0 10px 35px #b44c7425;box-sizing:border-box}h1{font-size:30px}.heart{font-size:48px}button{display:block;width:100%;margin:10px 0;padding:14px;border:0;border-radius:13px;background:#ffdfeb;color:#782749;font-size:16px;font-weight:bold}#msg{min-height:25px}.hidden{display:none}
+:root{--bg:#090609;--panel:#160b11;--red:#ff234f;--pink:#ff7897;--text:#fff1f4;--muted:#c9aeb6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at top,#30101d 0%,var(--bg) 55%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:10;background:#090609eF;border-bottom:1px solid #ff234f40;backdrop-filter:blur(12px)}
+nav{max-width:1050px;margin:auto;padding:14px 18px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+nav a{font-size:.92rem;color:#f5cbd5;padding:8px 11px;border-radius:20px;transition:.2s}
+nav a:hover{background:#ff234f20;color:white}
+main{max-width:920px;margin:auto;padding:26px 18px 70px}
+section{padding:58px 0;scroll-margin-top:75px}
+.hero{text-align:center;padding:64px 0 35px}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;font-size:.75rem;color:var(--pink)}
+h1{font-size:clamp(2.5rem,9vw,5.3rem);line-height:1.02;margin:14px 0;background:linear-gradient(100deg,#fff,#ff9ab0,#ff234f);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(1.7rem,5vw,2.5rem);margin:0 0 15px}
+p{line-height:1.8;color:#f0dce2}
+.sub{color:var(--muted);max-width:650px;margin:0 auto 25px}
+.panel{background:linear-gradient(145deg,#1d0c14ed,#10090def);border:1px solid #ff496b3b;border-radius:24px;padding:clamp(20px,5vw,34px);box-shadow:0 18px 55px #0005}
+.center{text-align:center}
+.btn{border:0;border-radius:999px;background:linear-gradient(100deg,#ff234f,#c80c38);color:white;padding:13px 20px;font-weight:750;font-size:1rem;cursor:pointer;box-shadow:0 8px 25px #ff234f33;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.secondary{background:#ffffff0b;border:1px solid #ff66833f;box-shadow:none}
+.heart-button{border:0;background:none;color:var(--red);font-size:clamp(7rem,25vw,11rem);line-height:1;cursor:pointer;filter:drop-shadow(0 0 18px #ff234f80);animation:beat 1.25s infinite;transition:transform .2s}
+.heart-button:active{transform:scale(.9)}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.09)}30%{transform:scale(1)}45%{transform:scale(1.06)}}
+.float-heart{position:fixed;bottom:-50px;z-index:0;pointer-events:none;opacity:.7;animation:floatUp linear forwards;color:#ff234f}
+@keyframes floatUp{to{transform:translateY(-115vh) rotate(30deg);opacity:0}}
+main,header{position:relative;z-index:1}
+.counter{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:22px 0}
+.counter div{min-width:95px;padding:15px 12px;border-radius:17px;background:#ff234f12;border:1px solid #ff66833a}
+.counter strong{display:block;font-size:2rem;color:#ff7897}
+.counter span{font-size:.82rem;color:var(--muted)}
+input,textarea,select{width:100%;background:#090609;color:white;border:1px solid #ff668355;border-radius:12px;padding:12px;font:inherit;margin:8px 0 14px}
+label{display:block;text-align:left;color:#f3c9d4;font-size:.92rem}
+.letter{display:none;margin-top:20px;padding:22px;border-radius:18px;background:#ff234f0c;border:1px dashed #ff7897;text-align:left;white-space:pre-line}
+.letter.open{display:block;animation:appear .5s ease}
+@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.quiz-q{font-size:1.2rem;font-weight:750;margin:18px 0}
+.answers{display:grid;grid-template-columns:1fr;gap:10px}
+.answer{background:#ffffff08;color:var(--text);border:1px solid #ff668355;padding:13px 15px;border-radius:13px;text-align:left;cursor:pointer;font:inherit}
+.answer:hover{background:#ff234f20}
+#quizResult{min-height:30px;color:#ff9ab0;font-weight:700;margin-top:15px}
+.final{position:relative;overflow:hidden;text-align:center;background:radial-gradient(circle at center,#4a1023,#13080f 68%);border:1px solid #ff234f55;border-radius:28px;padding:42px 22px}
+.final h2{font-size:clamp(2rem,7vw,3.6rem);color:#ff7897}
+.love-end{margin:34px auto 8px;padding:22px 8px 14px;text-align:center;opacity:0;transform:translateY(25px) scale(.94);transition:opacity 1s ease,transform 1s ease;}
+.love-end.show{opacity:1;transform:translateY(0) scale(1)}
+.love-end .i-love{font-size:clamp(2.8rem,13vw,6rem);line-height:1.05;font-weight:1000;letter-spacing:.04em;background:linear-gradient(120deg,#fff0f4,#ff5478,#ff174f,#fff0f4);background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:loveGlow 3s ease-in-out infinite,shine 4s linear infinite;text-shadow:0 0 28px #ff174f35;}
+.love-end .uk-love{font-size:clamp(1.5rem,6vw,3rem);font-weight:900;color:#fff1f4;margin-top:15px;text-shadow:0 0 16px #ff174f,0 0 35px #ff174f55;}
+.love-end .love-heart{font-size:clamp(2.3rem,9vw,4rem);display:inline-block;filter:drop-shadow(0 0 16px #ff174f);animation:heartbeat 1.2s ease-in-out infinite;margin-top:12px;}
+@keyframes loveGlow{0%,100%{filter:drop-shadow(0 0 8px #ff174f55)}50%{filter:drop-shadow(0 0 22px #ff174f)}}
+@keyframes shine{to{background-position:250% center}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.16)}30%{transform:scale(1)}45%{transform:scale(1.1)}}
+footer{text-align:center;color:#a98993;font-size:.85rem;padding-top:25px}
+.small{font-size:.88rem;color:var(--muted)}
+@media(min-width:650px){.answers{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition:none!important}}
+
+#cinemaEnding{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:26px;background:radial-gradient(circle at center,#4b071d 0%,#13050c 42%,#030203 100%);overflow:hidden}
+#cinemaEnding.active{display:flex;animation:cinemaFade 1.2s ease both}
+#cinemaEnding:before{content:"";position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent,#ff174f22,transparent,#ff174f15,transparent);animation:cinemaSpin 16s linear infinite}
+.cinema-content{position:relative;z-index:2;max-width:760px}
+.cinema-kicker{color:#ff9bb2;letter-spacing:.28em;text-transform:uppercase;font-size:.72rem;opacity:0;animation:cinemaRise 1s .5s forwards}
+.cinema-line{font-size:clamp(1.25rem,4.8vw,2.4rem);line-height:1.5;color:#fff1f4;min-height:4.5em;margin:24px 0;text-shadow:0 0 25px #ff174f40}
+.cinema-big{font-size:clamp(2.8rem,12vw,6.5rem);font-weight:1000;line-height:1.05;letter-spacing:.025em;background:linear-gradient(110deg,#fff,#ff8ba5,#ff174f,#fff);background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3s linear infinite;filter:drop-shadow(0 0 24px #ff174f66);opacity:0;transform:scale(.7)}
+.cinema-big.reveal{animation:cinemaBoom 1.2s cubic-bezier(.2,1.5,.4,1) forwards,shine 3s linear infinite}
+.cinema-heart{font-size:clamp(3rem,12vw,6rem);margin:18px 0;filter:drop-shadow(0 0 25px #ff174f);animation:heartbeat 1.15s infinite}
+.cinema-close{position:relative;z-index:2;margin-top:28px;background:#ffffff10;color:#fff;border:1px solid #ff789766;border-radius:99px;padding:12px 20px;font:inherit;cursor:pointer;opacity:0;animation:cinemaRise .8s 5s forwards}
+.cinema-spark{position:absolute;color:#ff426c;pointer-events:none;animation:sparkRise 4s linear forwards}
+@keyframes cinemaFade{from{opacity:0}to{opacity:1}}@keyframes cinemaSpin{to{transform:rotate(360deg)}}@keyframes cinemaRise{to{opacity:1;transform:translateY(0)}}@keyframes cinemaBoom{0%{opacity:0;transform:scale(.55);filter:blur(12px)}65%{opacity:1;transform:scale(1.08);filter:blur(0)}100%{opacity:1;transform:scale(1)}}@keyframes sparkRise{to{transform:translateY(-110vh) rotate(40deg);opacity:0}}
+
 </style>
 </head>
-<body><main class="card"><div class="heart">💗</div><h1>Маленька загадка</h1><p>Відгадай три загадки й відкрий сюрприз ✨</p><h3 id="num">Загадка 1 із 3</h3><p id="q">Що стає теплішим, коли ти усміхаєшся?</p><div id="answers"></div><p id="msg"></p><section id="end" class="hidden"><div class="heart">💖</div><h1>Ти особлива!</h1><p>Я дуже радий, що ти є в моєму житті 🫶</p><p>Нехай у тебе завжди буде причина усміхатися. Це маленький сюрприз тільки для тебе 💕</p><button onclick="hearts()">Ще сердечок 💞</button></section></main>
+<body>
+<header>
+<nav aria-label="Головна навігація">
+<a href="#about">Про нас</a><a href="#heart">❤️ Серце</a><a href="#letter">💌 Лист</a><a href="#counter">🗓️ Наш час</a><a href="#music">🎵 Музика</a><a href="#game">🥹 Гра</a><a href="#typing">💌 Слова</a><a href="#comfort">🫂 Обійми</a><a href="#final">🌹 Фінал</a>
+</nav>
+</header>
+<main>
+<section class="hero" id="top">
+<div class="eyebrow">маленький сайт для особливої людини</div>
+<h1>Тільки ти ❤️</h1>
+<p class="sub">Серед мільйонів людей я радий, що ми знайшли одне одного.</p>
+<a class="btn" href="#about">Почати нашу історію ↓</a>
+</section>
+
+<section id="about">
+<div class="panel">
+<div class="eyebrow">наша історія</div>
+<h2>Про нас 🖤</h2>
+<p>Ми познайомилися в TikTok — звичайний момент, який став початком чогось особливого. Тоді я навіть не здогадувався, що одне знайомство може подарувати стільки усмішок і тепла.</p>
+<p>Потроху ми почали спілкуватися, дізнаватися одне про одного й ставати ближчими. Мені подобається, що серед мільйонів людей ми знайшли саме одне одного.</p>
+<p>Нехай наша історія тільки починається, але я хочу наповнювати її щасливими моментами, щирими словами й спогадами, які будуть тільки нашими. ❤️</p>
+</div>
+</section>
+
+<section id="heart" class="center">
+<div class="panel">
+<div class="eyebrow">натисни на серце</div>
+<h2>Моє серце для тебе</h2>
+<button class="heart-button" id="heartBtn" aria-label="Натисни на серце">♥</button>
+<p id="heartMessage" aria-live="polite">Тут заховано маленьке нагадування для тебе.</p>
+<button class="btn secondary" id="heartTextBtn">Відкрити повідомлення</button>
+</div>
+</section>
+
+<section id="letter">
+<div class="panel center">
+<div class="eyebrow">тільки для тебе</div>
+<h2>💌 Таємний лист</h2>
+<p>Є слова, які хочеться зберегти в одному особливому місці.</p>
+<button class="btn" id="openLetter">Відкрити лист ❤️</button>
+<div class="letter" id="letterText">Моя хороша ❤️
+
+Я хочу, щоб ти пам’ятала: ти особлива для мене. Навіть звичайний день стає кращим, коли ми спілкуємося. Мені подобається твоя усмішка, твої слова й те тепло, яке ти даруєш.
+
+Я не обіцяю бути ідеальним, але хочу бути щирим, підтримувати тебе й створювати з тобою багато щасливих спогадів. Дякую, що ти є в моєму житті. Обіймаю тебе думками. ❤️</div>
+</div>
+</section>
+
+<section id="counter">
+<div class="panel center">
+<div class="eyebrow">кожна мить має значення</div>
+<h2>🗓️ Скільки триває наша історія?</h2>
+<label for="startDate">Дата знайомства</label>
+<input type="date" id="startDate" value="2026-10-14">
+<button class="btn" id="saveDate">Порахувати ❤️</button>
+<div class="counter" id="counterDisplay" aria-live="polite"><div><strong>∞</strong><span>ваша історія</span></div></div>
+</div>
+</section>
+
+<section id="music">
+<div class="panel center">
+<div class="eyebrow">саундтрек для вас</div>
+<h2>🎵 Ваша музика</h2>
+<p>Урал Гайсин — «Только со мною» ❤️</p>
+<div style="position:relative;width:100%;max-width:640px;margin:18px auto 0;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid #ff668355">
+<iframe
+  src="https://www.youtube-nocookie.com/embed/Z_k-URZzN9o"
+  title="Урал Гайсин — Только со мною"
+  style="position:absolute;inset:0;width:100%;height:100%;border:0"
+  loading="lazy"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+</div>
+<p class="small">Натисни ▶️ у плеєрі, щоб слухати пісню прямо на сайті.</p>
+</div>
+</section>
+
+<section id="game">
+<div class="panel">
+<div class="eyebrow">маленька гра для двох</div>
+<h2>🥹 Наскільки ти мене знаєш?</h2>
+<div id="quizArea">
+<div class="quiz-q" id="quizQuestion">Що робить наші розмови особливими?</div>
+<div class="answers" id="quizAnswers">
+<button class="answer" data-correct="1">Щирість і увага одне до одного ❤️</button>
+<button class="answer" data-correct="0">Лише кількість повідомлень</button>
+<button class="answer" data-correct="0">Тільки красиві емодзі</button>
+<button class="answer" data-correct="0">Хто швидше відповість</button>
+</div>
+<div id="quizResult" aria-live="polite"></div>
+<button class="btn secondary" id="nextQuestion">Наступне питання →</button>
+</div>
+</div>
+</section>
+
+<section id="typing">
+<div class="panel center">
+<div class="eyebrow">слова від самого серця</div>
+<h2>🥹 Трохи важливих слів для тебе</h2>
+<p id="typingMessage" style="min-height:110px;white-space:pre-line;font-size:1.08rem;color:#fff1f4"></p>
+<button class="btn" id="startTyping">Прочитати ще раз ❤️</button>
+</div>
+</section>
+
+
+<section id="comfort">
+<div class="panel center">
+<div class="eyebrow">відкрий, коли тобі це потрібно</div>
+<h2>🫂 Якщо тобі сумно або ти образилась</h2>
+<p class="sub">Обери те, що зараз відчуваєш. Тут для тебе є кілька теплих слів ❤️</p>
+<div class="answers">
+<button class="answer" data-comfort="sad">🥺 Коли тобі сумно</button>
+<button class="answer" data-comfort="hurt">💔 Коли ти на мене образилась</button>
+<button class="answer" data-comfort="miss">🫶 Коли ти за мною сумуєш</button>
+</div>
+<div class="letter" id="comfortMessage" aria-live="polite"></div>
+</div>
+</section>
+
+<section id="final">
+<div class="final">
+<div class="eyebrow">і це ще не кінець</div>
+<h2>Я щасливий, що зустрів саме тебе 🌹</h2>
+<p>Нехай попереду в нас буде багато приводів усміхатися, підтримувати одне одного й створювати власні спогади.</p>
+<button class="btn" id="finalBtn">Натисни на сюрприз ❤️</button>
+<p id="finalMessage" aria-live="polite"></p>
+<div class="love-end" id="loveEnd" aria-label="I love you">
+  <div class="i-love">I <span style="color:#ff315e;-webkit-text-fill-color:#ff315e">♥</span> YOU</div>
+  <div class="uk-love">Я ТЕБЕ ЛЮБЛЮ</div>
+  <div class="love-heart">❤️</div>
+  <p style="color:#ffc3d0;font-size:1.05rem;margin-top:12px">Ти — моє наймиліше диво 🖤</p>
+</div>
+</div>
+</section>
+<footer>Зроблено з теплом і любов’ю ❤️🖤</footer>
+</main>
 <script>
-const data=[{q:"Що стає теплішим, коли ти усміхаєшся?",a:["Моє серденько 💗","Сніг","Лід"],c:0},{q:"Що можна подарувати без коробки?",a:["Камінь","Усмішку 😊","Олівець"],c:1},{q:"Ти для мене…",a:["Байдужа","Особлива 💖","Просто знайома"],c:1}];let n=0;function draw(){document.getElementById('num').textContent='Загадка '+(n+1)+' із 3';document.getElementById('q').textContent=data[n].q;let box=document.getElementById('answers');box.innerHTML='';document.getElementById('msg').textContent='';data[n].a.forEach((v,i)=>{let b=document.createElement('button');b.textContent=v;b.onclick=()=>{if(i!==data[n].c){document.getElementById('msg').textContent='Спробуй ще раз 💕';return}if(n<2){n++;draw()}else{document.getElementById('num').classList.add('hidden');document.getElementById('q').classList.add('hidden');box.classList.add('hidden');document.getElementById('msg').classList.add('hidden');document.getElementById('end').classList.remove('hidden');hearts()}};box.appendChild(b)})}function hearts(){for(let i=0;i<16;i++){let e=document.createElement('div');e.textContent=['💗','💖','💕','✨'][Math.floor(Math.random()*4)];e.style.cssText='position:fixed;left:'+Math.random()*95+'vw;top:'+Math.random()*90+'vh;font-size:28px;pointer-events:none';document.body.appendChild(e);setTimeout(()=>e.remove(),1800)}}draw();
-</script></body></html>
+const heartMessages = [
+  "Ти робиш мої дні теплішими. ❤️",
+  "Серед усіх людей я радий, що познайомився саме з тобою.",
+  "Ти заслуговуєш на щирість, турботу й багато усмішок. 🌹",
+  "Нехай навіть на відстані ти відчуваєш, що про тебе пам’ятають. 💌"
+];
+let heartIndex = 0;
+function floatHeart(symbol="♥") {
+  const el = document.createElement("span");
+  el.className = "float-heart";
+  el.textContent = symbol;
+  el.style.left = (5 + Math.random() * 90) + "vw";
+  el.style.fontSize = (14 + Math.random() * 24) + "px";
+  el.style.animationDuration = (4 + Math.random() * 4) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 8500);
+}
+document.getElementById("heartBtn").addEventListener("click", () => {
+  heartIndex = (heartIndex + 1) % heartMessages.length;
+  document.getElementById("heartMessage").textContent = heartMessages[heartIndex];
+  for(let i=0;i<7;i++) setTimeout(() => floatHeart(), i*90);
+});
+document.getElementById("heartTextBtn").addEventListener("click", () => {
+  document.getElementById("heartMessage").textContent = heartMessages[heartIndex];
+  floatHeart("❤");
+});
+document.getElementById("openLetter").addEventListener("click", () => {
+  const letter = document.getElementById("letterText");
+  letter.classList.toggle("open");
+  document.getElementById("openLetter").textContent = letter.classList.contains("open") ? "Сховати лист 💌" : "Відкрити лист ❤️";
+});
+const dateInput = document.getElementById("startDate");
+const counterDisplay = document.getElementById("counterDisplay");
+function renderCounter(dateString) {
+  if(!dateString){ counterDisplay.innerHTML = '<div><strong>❤️</strong><span>оберіть дату</span></div>'; return; }
+  const start = new Date(dateString + "T00:00:00");
+  const today = new Date(); today.setHours(0,0,0,0);
+  if(Number.isNaN(start.getTime()) || start > today) {
+    counterDisplay.innerHTML = '<div><strong>—</strong><span>перевір дату</span></div>'; return;
+  }
+  const days = Math.floor((today - start) / 86400000);
+  counterDisplay.innerHTML = `<div><strong>${days}</strong><span>днів від знайомства</span></div><div><strong>❤️</strong><span>і далі пишемо історію</span></div>`;
+}
+document.getElementById("saveDate").addEventListener("click", () => {
+  renderCounter(dateInput.value);
+  try { localStorage.setItem("loveSiteStartDate", dateInput.value); } catch(e) {}
+});
+dateInput.value = "2026-10-14";
+renderCounter(dateInput.value);
+try {
+  localStorage.setItem("loveSiteStartDate", dateInput.value);
+} catch(e) {}
+const questions = [
+  {q:"Що робить наші розмови особливими?",a:["Щирість і увага одне до одного ❤️","Лише кількість повідомлень","Тільки красиві емодзі","Хто швидше відповість"],correct:0,good:"Саме так ❤️ Найважливіше — щирість.",bad:"Спробуй ще раз 😊"},
+  {q:"Що найкраще підтримує стосунки?",a:["Довіра й повага","Ревнощі та контроль","Мовчати про все","Завжди бути правим"],correct:0,good:"Так! Довіра й повага мають значення 🖤",bad:"Подумай, що допомагає почуватися в безпеці й бути собою."},
+  {q:"Який подарунок може бути найціннішим?",a:["Увага й час разом","Лише дорогі речі","Ігнорування","Змагання"],correct:0,good:"Правильно! Турбота часто важливіша за ціну 🌹",bad:"Спробуй ще раз — цінність не завжди вимірюється грошима."}
+];
+let qIndex=0;
+function showQuestion(){
+  const q=questions[qIndex];
+  document.getElementById("quizQuestion").textContent=q.q;
+  const wrap=document.getElementById("quizAnswers");
+  wrap.innerHTML="";
+  q.a.forEach((answer,i)=>{
+    const b=document.createElement("button");
+    b.className="answer"; b.textContent=answer;
+    b.addEventListener("click",()=>{
+      document.getElementById("quizResult").textContent=i===q.correct?q.good:q.bad;
+      if(i===q.correct) for(let j=0;j<3;j++) setTimeout(()=>floatHeart(),j*100);
+    });
+    wrap.appendChild(b);
+  });
+  document.getElementById("quizResult").textContent="";
+}
+document.getElementById("nextQuestion").addEventListener("click",()=>{qIndex=(qIndex+1)%questions.length;showQuestion();});
+
+const comfortMessages = {
+ sad: "Моя хороша, якщо тобі зараз сумно — не потрібно вдавати, що все добре. ❤️ Ти маєш право на будь-які почуття. Я хочу вислухати тебе, підтримати й бути поруч настільки, наскільки зможу. Ти не мусиш проходити через усе сама. Обіймаю тебе міцно. 🫂",
+ hurt: "Якщо я тебе образив — мені справді шкода. ❤️ Я не хочу знецінювати твої почуття чи робити вигляд, ніби нічого не сталося. Ти важлива для мене, і я хочу зрозуміти, що саме тебе зачепило, вислухати тебе й постаратися виправити ситуацію не лише словами, а й учинками. Коли будеш готова, давай спокійно поговоримо. 🫂",
+ miss: "Якби я міг, то зараз подарував би тобі найтепліші обійми. ❤️ Навіть якщо ми не поруч, я думаю про тебе й дуже хочу, щоб ти усміхнулася. Уяви, що це маленьке повідомлення — мої обійми через екран. Бережи себе, моя хороша. 🖤"
+};
+document.querySelectorAll("[data-comfort]").forEach(button => {
+  button.addEventListener("click", () => {
+    const box = document.getElementById("comfortMessage");
+    box.textContent = comfortMessages[button.dataset.comfort];
+    box.classList.add("open");
+    for(let i=0;i<5;i++) setTimeout(()=>floatHeart("♥"), i*140);
+  });
+});
+
+const typingText = "Знаєш, я не завжди можу підібрати ідеальні слова, але хочу, щоб ти знала одне: ти дуже багато для мене значиш. ❤️\n\nЯ радий, що ми познайомилися. Мені хочеться дарувати тобі усмішки, підтримувати тебе й робити навіть звичайні дні трохи кращими.\n\nДякую, що ти є в моєму житті. Нехай у нас буде ще багато щасливих моментів, теплих розмов і спогадів, які належатимуть тільки нам. 🖤";
+let typingTimer = null;
+function startTypingMessage(){
+  if(typingTimer) clearInterval(typingTimer);
+  const target = document.getElementById("typingMessage");
+  target.textContent = "";
+  let i = 0;
+  typingTimer = setInterval(()=>{
+    target.textContent = typingText.slice(0, i + 1);
+    i++;
+    if(i >= typingText.length){ clearInterval(typingTimer); typingTimer = null; }
+  }, 38);
+}
+document.getElementById("startTyping").addEventListener("click", startTypingMessage);
+startTypingMessage();
+
+const cinemaEnding = document.getElementById("cinemaEnding");
+const cinemaLin
