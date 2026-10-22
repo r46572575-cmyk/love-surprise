@@ -292,6 +292,7 @@ function showQuestion(){
   document.getElementById("quizResult").textContent="";
 }
 document.getElementById("nextQuestion").addEventListener("click",()=>{qIndex=(qIndex+1)%questions.length;showQuestion();});
+showQuestion();
 
 const comfortMessages = {
  sad: "Моя хороша, якщо тобі зараз сумно — не потрібно вдавати, що все добре. ❤️ Ти маєш право на будь-які почуття. Я хочу вислухати тебе, підтримати й бути поруч настільки, наскільки зможу. Ти не мусиш проходити через усе сама. Обіймаю тебе міцно. 🫂",
@@ -324,4 +325,47 @@ document.getElementById("startTyping").addEventListener("click", startTypingMess
 startTypingMessage();
 
 const cinemaEnding = document.getElementById("cinemaEnding");
-const cinemaLin
+const cinemaLine = document.getElementById("cinemaLine");
+function launchCinema(){
+  cinemaEnding.classList.add("active");
+  document.body.style.overflow="hidden";
+  cinemaLine.textContent="";
+  document.getElementById("cinemaBig").classList.remove("reveal");
+  const words="У цьому величезному світі є мільйони історій… Але моя улюблена почалася тоді, коли в ній з’явилася ти. І я хочу, щоб попереду в нас було ще дуже багато сторінок. ❤️";
+  let i=0;
+  const timer=setInterval(()=>{cinemaLine.textContent=words.slice(0,++i);if(i>=words.length){clearInterval(timer);setTimeout(()=>document.getElementById("cinemaBig").classList.add("reveal"),450)}},42);
+  for(let i=0;i<34;i++)setTimeout(()=>{const h=document.createElement("span");h.className="cinema-spark";h.textContent=Math.random()>.5?"♥":"✦";h.style.left=Math.random()*100+"%";h.style.bottom="-30px";h.style.fontSize=(14+Math.random()*24)+"px";h.style.animationDuration=(3+Math.random()*3)+"s";cinemaEnding.appendChild(h);setTimeout(()=>h.remove(),6500)},i*110);
+}
+document.getElementById("finalBtn").addEventListener("click",()=>{
+  document.getElementById("finalMessage").textContent="Ти — важлива частинка моєї історії. Дивись до самого кінця… ❤️";
+  for(let i=0;i<18;i++) setTimeout(()=>floatHeart(i%2?"♥":"❤"),i*80);
+  setTimeout(launchCinema,700);
+});
+document.getElementById("cinemaClose").addEventListener("click",()=>{cinemaEnding.classList.remove("active");document.body.style.overflow="";});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&cinemaEnding.classList.contains("active")){cinemaEnding.classList.remove("active");document.body.style.overflow="";}});
+const loveEnd = document.getElementById("loveEnd");
+if ("IntersectionObserver" in window) {
+  const endObserver = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      loveEnd.classList.add("show");
+      for (let i=0;i<12;i++) setTimeout(()=>floatHeart(i%2?"♥":"❤"),i*120);
+      endObserver.disconnect();
+    }
+  }, {threshold:0.35});
+  endObserver.observe(loveEnd);
+} else { loveEnd.classList.add("show"); }
+setInterval(()=>{ if(Math.random()>.42) floatHeart(); },1600);
+<div id="cinemaEnding" role="dialog" aria-modal="true" aria-label="Романтичний сюрприз">
+  <div class="cinema-content">
+    <div class="cinema-kicker">одна маленька історія про нас</div>
+    <div class="cinema-line" id="cinemaLine"></div>
+    <div class="cinema-big" id="cinemaBig">I <span style="color:#ff315e;-webkit-text-fill-color:#ff315e">♥</span> YOU</div>
+    <div class="cinema-heart">❤️</div>
+    <div style="font-size:clamp(1.4rem,5vw,2.5rem);font-weight:900;color:#fff1f4;text-shadow:0 0 20px #ff174f">Я ТЕБЕ ЛЮБЛЮ</div>
+    <p style="color:#ffc3d0">І якби можна було почати все спочатку — я б знову захотів зустріти саме тебе. 🖤</p>
+  </div>
+  <button class="cinema-close" id="cinemaClose">Повернутися до нашої історії ❤️</button>
+</div>
+</script>
+</body>
+</html>
