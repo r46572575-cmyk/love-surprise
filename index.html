@@ -217,7 +217,6 @@ footer{text-align:center;color:#a98993;font-size:.85rem;padding-top:25px}
 <footer>Зроблено з теплом і любов’ю ❤️🖤</footer>
 </main>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
 const heartMessages = [
   "Ти робиш мої дні теплішими. ❤️",
   "Серед усіх людей я радий, що познайомився саме з тобою.",
@@ -324,37 +323,5 @@ function startTypingMessage(){
 document.getElementById("startTyping").addEventListener("click", startTypingMessage);
 startTypingMessage();
 
-const cinemaEnding = document.createElement("div");
-cinemaEnding.id = "cinemaEnding";
-cinemaEnding.innerHTML = `
-  <div class="cinema-content">
-    <div class="cinema-kicker">для тебе — від усього серця</div>
-    <div class="cinema-line">Серед мільйонів людей я радий, що зустрів саме тебе.</div>
-    <div class="cinema-heart">❤️</div>
-    <div class="cinema-big" id="cinemaBig">Я ТЕБЕ ЛЮБЛЮ</div>
-  </div>
-  <button class="cinema-close" id="cinemaClose">Повернутися ❤️</button>
-`;
-document.body.appendChild(cinemaEnding);
-
-const finalBtn = document.getElementById("finalBtn");
-if (finalBtn) {
-  finalBtn.addEventListener("click", () => {
-    cinemaEnding.classList.add("active");
-    const big = document.getElementById("cinemaBig");
-    big.classList.remove("reveal");
-    void big.offsetWidth;
-    big.classList.add("reveal");
-    for (let i = 0; i < 18; i++) {
-      setTimeout(() => floatHeart("♥"), i * 120);
-    }
-  });
-}
-
-document.getElementById("cinemaClose").addEventListener("click", () => {
-  cinemaEnding.classList.remove("active");
-});
-});
-</script>
-</body>
-</html>
+const cinemaEnding = document.getElementById("cinemaEnding");
+const cinemaLin
