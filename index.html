@@ -76,6 +76,282 @@ footer{text-align:center;color:#a98993;font-size:.85rem;padding-top:25px}
 .cinema-spark{position:absolute;color:#ff426c;pointer-events:none;animation:sparkRise 4s linear forwards}
 @keyframes cinemaFade{from{opacity:0}to{opacity:1}}@keyframes cinemaSpin{to{transform:rotate(360deg)}}@keyframes cinemaRise{to{opacity:1;transform:translateY(0)}}@keyframes cinemaBoom{0%{opacity:0;transform:scale(.55);filter:blur(12px)}65%{opacity:1;transform:scale(1.08);filter:blur(0)}100%{opacity:1;transform:scale(1)}}@keyframes sparkRise{to{transform:translateY(-110vh) rotate(40deg);opacity:0}}
 
+/* Подарунок із золотою каблучкою */
+.ring-gift {
+  position: relative;
+  width: min(300px, 80vw);
+  height: 280px;
+  margin: 12px auto 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 800px;
+}
+
+.gift-box {
+  position: absolute;
+  bottom: 20px;
+  width: 155px;
+  height: 100px;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #805016, #f5d77b 45%, #9a651c);
+  box-shadow: 0 15px 45px #d49a2d35;
+  transition: opacity .6s, transform .6s;
+}
+
+.gift-box::before {
+  content: "";
+  position: absolute;
+  left: 64px;
+  top: 0;
+  width: 27px;
+  height: 100%;
+  background: linear-gradient(90deg, #fff0ad, #c48a25, #ffe8a0);
+}
+
+.gift-lid {
+  position: absolute;
+  z-index: 2;
+  bottom: 110px;
+  width: 175px;
+  height: 32px;
+  border-radius: 7px;
+  background: linear-gradient(110deg, #9d6b20, #ffe7a0, #b47a21);
+  transition: transform .9s cubic-bezier(.2,1.4,.4,1);
+}
+
+.gift-lid::after {
+  content: " ";
+  position: absolute;
+  width: 26px;
+  height: 32px;
+  left: 74px;
+  background: #fff0b0;
+}
+
+.ring-visual {
+  position: absolute;
+  bottom: 105px;
+  width: 105px;
+  height: 105px;
+  opacity: 0;
+  transform: translateY(35px) scale(.5);
+  transition: opacity 1s .4s, transform 1s .4s;
+  filter: drop-shadow(0 0 16px #ffda70);
+}
+
+.ring-band {
+  position: absolute;
+  left: 15px;
+  top: 34px;
+  width: 76px;
+  height: 65px;
+  border: 12px solid #e8b947;
+  border-top-color: #fff0a2;
+  border-left-color: #bd8123;
+  border-radius: 50%;
+  transform: rotate(-20deg);
+  box-shadow: inset 0 0 5px #fff5bc, 0 0 8px #edc45d;
+}
+
+.ring-diamond {
+  position: absolute;
+  top: 12px;
+  left: 42px;
+  width: 27px;
+  height: 30px;
+  background: linear-gradient(135deg, #fff, #a8e8ff 35%, #fff 55%, #d6a9ff);
+  clip-path: polygon(25% 0, 75% 0, 100% 35%, 50% 100%, 0 35%);
+  filter: drop-shadow(0 0 8px white);
+  animation: diamondShine 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes diamondShine {
+  from { filter: brightness(.85) drop-shadow(0 0 5px #fff); }
+  to { filter: brightness(1.5) drop-shadow(0 0 18px #fff); }
+}
+
+#cinemaEnding.gift-opened .gift-lid {
+  transform: translateY(-85px) rotate(-15deg);
+}
+
+#cinemaEnding.gift-opened .gift-box {
+  transform: translateY(15px);
+  opacity: .75;
+}
+
+#cinemaEnding.gift-opened .ring-visual {
+  opacity: 1;
+  transform: translateY(-28px) scale(1);
+}
+
+.gift-message {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 1s .7s, transform 1s .7s;
+}
+
+#cinemaEnding.gift-opened .gift-message {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gift-open-button {
+  position: relative;
+  z-index: 3;
+  border: 1px solid #f5d77b99;
+  border-radius: 30px;
+  padding: 13px 24px;
+  color: #fff3c7;
+  background: linear-gradient(110deg, #805016, #b7832c);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-diamond { animation: none; }
+  }
+    
+/* Подарунок із золотою каблучкою */
+.ring-gift {
+  position: relative;
+  width: min(300px, 80vw);
+  height: 280px;
+  margin: 12px auto 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 800px;
+}
+
+.gift-box {
+  position: absolute;
+  bottom: 20px;
+  width: 155px;
+  height: 100px;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #805016, #f5d77b 45%, #9a651c);
+  box-shadow: 0 15px 45px #d49a2d35;
+  transition: opacity .6s, transform .6s;
+}
+
+.gift-box::before {
+  content: "";
+  position: absolute;
+  left: 64px;
+  top: 0;
+  width: 27px;
+  height: 100%;
+  background: linear-gradient(90deg, #fff0ad, #c48a25, #ffe8a0);
+}
+
+.gift-lid {
+  position: absolute;
+  z-index: 2;
+  bottom: 110px;
+  width: 175px;
+  height: 32px;
+  border-radius: 7px;
+  background: linear-gradient(110deg, #9d6b20, #ffe7a0, #b47a21);
+  transition: transform .9s cubic-bezier(.2,1.4,.4,1);
+}
+
+.gift-lid::after {
+  content: " ";
+  position: absolute;
+  width: 26px;
+  height: 32px;
+  left: 74px;
+  background: #fff0b0;
+}
+
+.ring-visual {
+  position: absolute;
+  bottom: 105px;
+  width: 105px;
+  height: 105px;
+  opacity: 0;
+  transform: translateY(35px) scale(.5);
+  transition: opacity 1s .4s, transform 1s .4s;
+  filter: drop-shadow(0 0 16px #ffda70);
+}
+
+.ring-band {
+  position: absolute;
+  left: 15px;
+  top: 34px;
+  width: 76px;
+  height: 65px;
+  border: 12px solid #e8b947;
+  border-top-color: #fff0a2;
+  border-left-color: #bd8123;
+  border-radius: 50%;
+  transform: rotate(-20deg);
+  box-shadow: inset 0 0 5px #fff5bc, 0 0 8px #edc45d;
+}
+
+.ring-diamond {
+  position: absolute;
+  top: 12px;
+  left: 42px;
+  width: 27px;
+  height: 30px;
+  background: linear-gradient(135deg, #fff, #a8e8ff 35%, #fff 55%, #d6a9ff);
+  clip-path: polygon(25% 0, 75% 0, 100% 35%, 50% 100%, 0 35%);
+  filter: drop-shadow(0 0 8px white);
+  animation: diamondShine 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes diamondShine {
+  from { filter: brightness(.85) drop-shadow(0 0 5px #fff); }
+  to { filter: brightness(1.5) drop-shadow(0 0 18px #fff); }
+}
+
+#cinemaEnding.gift-opened .gift-lid {
+  transform: translateY(-85px) rotate(-15deg);
+}
+
+#cinemaEnding.gift-opened .gift-box {
+  transform: translateY(15px);
+  opacity: .75;
+}
+
+#cinemaEnding.gift-opened .ring-visual {
+  opacity: 1;
+  transform: translateY(-28px) scale(1);
+}
+
+.gift-message {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 1s .7s, transform 1s .7s;
+}
+
+#cinemaEnding.gift-opened .gift-message {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gift-open-button {
+  position: relative;
+  z-index: 3;
+  border: 1px solid #f5d77b99;
+  border-radius: 30px;
+  padding: 13px 24px;
+  color: #fff3c7;
+  background: linear-gradient(110deg, #805016, #b7832c);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-diamond { animation: none; }
+  }
+  
 </style>
 </head>
 <body>
